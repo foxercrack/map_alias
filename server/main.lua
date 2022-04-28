@@ -43,7 +43,7 @@ RegisterCommand('alias', function(source, args)
         if target ~= nil then
             local res = MySQL.query.await('SELECT * FROM `alias` WHERE `target` = ?', { target })
             if res[1] == nil then
-                MySQL.insert('INSERT INTO `alias` (`identifier`, `text`, `target`) VALUES (?, ?, ?)', { localPlayer, args[2], target }, function()
+                MySQL.insert('INSERT INTO `alias` (`identifier`, `text`, `target`) VALUES (?, ?, ?)', { localPlayer, tostring(args[2]), target }, function()
                     notify(_source, Config.Locale["successfullyAlias"])
                     fetchAlias(_source)
                 end)
