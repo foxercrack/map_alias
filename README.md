@@ -4,7 +4,7 @@ Dependency:
   oxmysql (https://github.com/overextended/oxmysql)
 
 Optimization: 0.00-0.06
-Discord: https://discord.gg/33WZdT66n3
+Discord: https://discord.gg/WUTCeuutUS
 # Commands
 /alias id text
 
