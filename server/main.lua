@@ -34,7 +34,7 @@ AddEventHandler('map-alias:getPlayers', function()
 end)
 
 RegisterCommand('alias', function(source, args)
-    if args[2] or args[1] == nil then return end
+    if args[1] == nil then return end
     local _source = source
     if _source > 0 then
         local localPlayer = GetPlayerIdentifier(_source)
@@ -57,7 +57,7 @@ end)
 
 
 RegisterCommand('removealias', function(source, args)
-    if args[2] or args[1] == nil then return end
+    if args[1] == nil then return end
     local _source = source
     if _source > 0 then
         local target = GetPlayerIdentifier(args[1])
