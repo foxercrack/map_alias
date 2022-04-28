@@ -34,11 +34,11 @@ AddEventHandler('map-alias:getPlayers', function()
 end)
 
 RegisterCommand('alias', function(source, args)
+    if args[2] or args[1] == nil then return end
     local _source = source
     if _source > 0 then
         local localPlayer = GetPlayerIdentifier(_source)
         local target = GetPlayerIdentifier(args[1])
-        if args[2] == nil then return end
         if target ~= nil then
             local res = MySQL.query.await('SELECT * FROM `alias` WHERE `target` = ?', { target })
             if res[1] == nil then
@@ -57,6 +57,7 @@ end)
 
 
 RegisterCommand('removealias', function(source, args)
+    if args[2] or args[1] == nil then return end
     local _source = source
     if _source > 0 then
         local target = GetPlayerIdentifier(args[1])
