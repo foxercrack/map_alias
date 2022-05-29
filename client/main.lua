@@ -31,13 +31,21 @@ Citizen.CreateThread(function()
             local player = getPlayerFromIdentifier(v.target)
             if player then
                 local pedCoords = GetEntityCoords(player)
-                local text = v.text
-                
-                if text ~= nil then
-                    DrawText3Ds(pedCoords.x, pedCoords.y, pedCoords.z + 1.0, text)
+                if Config.MaskCheck and GetPedDrawableVariation(player, 1) ~= 0 then
+
+                    if Config.Mask3d then
+                        DrawText3Ds(pedCoords.x, pedCoords.y, pedCoords.z + 1.0, Config.Locale["mask"])
+                    end
+
+                else
+                    local text = v.text
+                    if text ~= nil then
+                        DrawText3Ds(pedCoords.x, pedCoords.y, pedCoords.z + 1.0, text)
+                    end
+
                 end
             else
-                Citizen.Wait(200)
+                Citizen.Wait(500)
             end
         end
     end
@@ -59,7 +67,7 @@ function getPlayerFromIdentifier(identifier)
     return nil
 end
 
- function DrawText3Ds(x, y, z, text)
+function DrawText3Ds(x, y, z, text)
 	SetTextScale(0.4, 0.4)
     SetTextFont(4)
     SetTextColour(255, 255, 255, 215)
