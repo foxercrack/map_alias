@@ -35,7 +35,7 @@ RegisterCommand('alias', function(source, args)
         if target ~= nil then
             local res = MySQL.query.await('SELECT * FROM `alias` WHERE `target` = ?', { target })
             if res[1] == nil then
-                MySQL.insert('INSERT INTO `alias` (`identifier`, `text`, `target`) VALUES (?, ?, ?)', { localPlayer, tostring(args[2]), target }, function()
+                MySQL.insert('INSERT INTO `alias` (`id`, `identifier`, `text`, `target`) VALUES (NULL, ?, ?, ?)', { localPlayer, tostring(args[2]), target }, function()
                     notify(_source, Config.Locale["successfullyAlias"])
                     fetchAlias(_source)
                 end)
@@ -54,7 +54,7 @@ RegisterCommand('removealias', function(source, args)
     if _source > 0 and args[1] then
         local target = GetPlayerIdentifier(args[1], 0)
         if target ~= nil then
-            MySQL.update('DELETE FROM `alias` WHERE `target` = ?', { target }, function()
+            MySQL.update('DELETE FROM `alias` WHERE `target` = ? AND identifier = ?', { target, GetPlayerIdentifier(source, 0) }, function()
                 notify(_source, Config.Locale["aliasRemoved"])
                 fetchAlias(_source)
             end)
