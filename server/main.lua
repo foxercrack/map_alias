@@ -33,7 +33,7 @@ RegisterCommand('alias', function(source, args)
         local target = GetPlayerIdentifier(args[1], 0)
 
         if target ~= nil then
-            local res = MySQL.query.await('SELECT * FROM `alias` WHERE `target` = ?', { target })
+            local res = MySQL.query.await('SELECT * FROM `alias` WHERE `target` = ? AND `identifier` = ?', { target, localPlayer })
             if res[1] == nil then
                 MySQL.insert('INSERT INTO `alias` (`id`, `identifier`, `text`, `target`) VALUES (NULL, ?, ?, ?)', { localPlayer, tostring(args[2]), target }, function()
                     notify(_source, Config.Locale["successfullyAlias"])
